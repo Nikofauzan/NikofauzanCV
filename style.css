@@ -1,0 +1,89 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+  transition: background-color 0.8s ease, color 0.8s ease; /* lebih lama & halus */
+}
+
+.dark body {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Aurora Background */
+@keyframes pulse-aurora {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+  animation: pulse-aurora 10s infinite ease-in-out;
+}
+.dark .aurora-bg {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #e2e8f0; }
+.dark ::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* Custom Classes pakai Tailwind @apply */
+.nav-link {
+  @apply text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white font-medium px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow di dark mode */
+.dark .text-glow {
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #2563eb; /* warna biru Tailwind */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
